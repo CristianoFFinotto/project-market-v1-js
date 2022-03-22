@@ -17,21 +17,15 @@
 
 */
 
+
 let lastID = '0';               // Global ID counter                     
 
-export const addProduct = (products, config) => {
 
-    if(Array().isArray(products) && products.length > 0){
+// TODO: Specifiche
 
-        let lastId = products[products.length - 1].id;  // take last item into list
+export const addProduct = () => {
 
-        let idGen = idGenerator(lastId);
-    }    
-
-    else {
-
-        let idGen = idGenerator(config.id);         // use default format from config
-    }
+    
 
 }
 
@@ -126,4 +120,34 @@ export const productExpiringDateGenerator = (config) => {
     expiringDate.setDate(startingDate.getDate() + random);
 
     return expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+}
+
+
+// TODO: Specifiche
+
+export const productState = (product, startingDate, currentDate, config) => {
+
+    if(product.checked === 0)
+    {
+        if(new Date(product.expiredDate) >= new Date(currentDate))
+            product.status = "New";
+        else
+            product.status = "Expired";
+    }
+    else
+    {
+        if(new Date(product.expiredDate) < new Date(currentDate))
+            product.status = "Expired";
+        else if(product.checked >= config.productOnShelf_MaxWeeks)
+            product.status = "Old";
+        else
+            product.status = "Valid";
+    }
+    
+    console.log("Expired Date -->",product.expiredDate);
+    console.log("Corrent Date -->",currentDate);
+    console.log("Starting Date -->",startingDate);
+    console.log("Product Checked -->",product.checked);
+    console.log(product.status);
+
 }
