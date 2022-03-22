@@ -42,7 +42,7 @@ export const addProduct = (products, config) => {
  * @returns increased unique id
  */
 
-export const idGenerator = (config) => {        // 00 or 000 FORMAT
+export const productIdGenerator = (config) => {        // 00 or 000 FORMAT
 
     if(Number(lastID) < 99){                    
         let formatLength = config.idFormat.length;
@@ -85,4 +85,45 @@ export const idGenerator = (config) => {        // 00 or 000 FORMAT
             
             return lastID;
         }
+}
+
+
+/**
+ * Function permit choose random element on array
+ * @param {object} poolNames - array of name 
+ * @returns random product name chosen on pool
+ */
+
+/*
+    math.floor round to greater integer number ex. 1,2,5
+    math.random generate random number from 0 (inclusive) <-> 1 (exlusive) ex. 0.76757573      
+*/
+
+export const productNameGenerator = (poolNames) => {
+
+    return poolNames[Math.floor(Math.random()*poolNames.length)];
+    
+}
+
+
+/**
+ * Function generate randome expiration date from a range
+ * @param {object} config - configuration file by manager
+ * @returns expiration date generated
+ */
+
+export const productExpiringDateGenerator = (config) => {
+
+    let date = new Date();
+    let startingDate = new Date(date);
+    startingDate.setDate(date.getDate() + config.dayStartExecutionProg);
+    
+    let finishingDate = new Date(startingDate);
+    finishingDate.setDate(startingDate.getDate() + (config.daysInWeek * config.weekExecutionProg));
+    
+    let random = Math.floor(Math.random()*(config.daysInWeek * config.weekExecutionProg));
+    let expiringDate = new Date(startingDate);
+    expiringDate.setDate(startingDate.getDate() + random);
+
+    return expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
 }

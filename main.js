@@ -19,7 +19,7 @@ import * as product from './functions.js';
 const config = {
     productOnShelf_MaxWeeks: 2, 
     productByWeeksArrive: 5,
-    dayExecutionProg: 30,       // plus current day + 1
+    dayStartExecutionProg: 30,       // plus current day
     weekExecutionProg: 4,
     durationPrinting: 3000,
     daysInWeek: 7,
@@ -32,11 +32,14 @@ const config = {
     this array contains all products
 */
 
-const items = [
-    {
-        name: 'carote',
-        expirationDate: 2022-10-12
-    }
+const itemsName = [
+    
+        'Cheese', 'Banana', 'Green Beans', 'Meat', 'Apple', 'Nutella', 'Rice', 
+        'Roast Beef', 'Salad', 'Dried Fruit', 'Pasta'
+    
 ];
 
-console.log(product.idGenerator(config));
+
+
+
+
