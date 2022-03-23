@@ -19,10 +19,8 @@ import * as flow from './functions/flow.js';
     move forward logically into timeline to program start
     copy of starting date --> currentDate for range
     set current date (program life) each week changes 
-
-
-
 */
+
 let date = new Date();             
 let startingDate = new Date(date); 
 startingDate.setDate(date.getDate() + config.dayStartExecutionProg);
