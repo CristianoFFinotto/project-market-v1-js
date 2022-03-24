@@ -37,16 +37,3 @@ export const addProduct = (currentDate, config, itemsName) => {
         checked: checkedProduct
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

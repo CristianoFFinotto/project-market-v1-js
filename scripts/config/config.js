@@ -19,7 +19,7 @@ export const config = {
     productOnShelf_MaxWeeks: 2, 
     productByWeeksArrive: 5,
     dayStartExecutionProg: 0,       // plus current day
-    weekExecutionProg: 4,
+    weekExecutionProg: 2,
     durationPrinting: 3000,
     daysInWeek: 7,
     idFormat: '00'

@@ -10,6 +10,8 @@
  * Used by functions file to execute some specific tools
  */
 
+import { config } from '../config/config.js';
+
 let lastID = '0';               // Global ID counter    
 
 /**
@@ -18,7 +20,7 @@ let lastID = '0';               // Global ID counter
  * @returns increased unique id
  */
 
- export const productIdGenerator = (config) => {        // 00 or 000 FORMAT
+ export const productIdGenerator = () => {        // 00 or 000 FORMAT
 
     if(Number(lastID) < 99){                    
         let formatLength = config.idFormat.length;
@@ -87,7 +89,7 @@ export const productNameGenerator = (poolNames) => {
  * @returns expiration date generated
  */
 
- export const productExpiringDateGenerator = (config) => {
+ export const productExpiringDateGenerator = () => {
 
     let date = new Date();
     let startingDate = new Date(date);
@@ -114,7 +116,7 @@ export const newProductState = (expiredDate, currentDate) => {
 }
     
 
-export const filterProductState = (checked, expiredDate, currentDate, config) => {
+export const filterProductState = (checked, expiredDate, currentDate) => {
 
     if(new Date(expiredDate) < new Date(currentDate))
         return "Expired";
@@ -123,6 +125,3 @@ export const filterProductState = (checked, expiredDate, currentDate, config) =>
     else
         return "Valid";   
 }
-
-
-    
