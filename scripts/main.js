@@ -31,27 +31,29 @@ let startingDate = new Date(date);
 startingDate.setDate(date.getDate() + config.dayStartExecutionProg);
 let currentDate = new Date(startingDate);
 
-for (let weeksIndex = 0; weeksIndex < config.weekExecutionProg; weeksIndex++) {
+let weeksIndex = 0; 
+
+let intervalID = setInterval(() => {
 
     currentDate.setDate(startingDate.getDate() + (config.daysInWeek * weeksIndex));
 
     productList.forEach(element => {            // filter products
-        element.checked = weeksIndex;
+        element.checked++;
         element.status = tools.filterProductState(element.checked, element.expiredDate, currentDate);
     })
 
-    console.log("Current Date -->"+currentDate,"\n");
     for (let productsIndexArrived = 0; productsIndexArrived < config.productByWeeksArrive; productsIndexArrived++) {                 // arrive products
         
         productList.push(flow.addProduct(currentDate, config, itemsName));
         
     }
-    
-    console.log("---- Arrivo Prodotti ----");
+
+    console.log("Week of", currentDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-'));
+    console.log("---------------------------------------------------------")
     productList.forEach(element => console.log(element));
-    
+
     // TODO: Stampa prodotti
-    
+
     for (let productIndex = 0; productIndex < productList.length; productIndex++) {                 // remove expired products
         
         if(productList[productIndex].status === "Expired")
@@ -61,8 +63,16 @@ for (let weeksIndex = 0; weeksIndex < config.weekExecutionProg; weeksIndex++) {
         }
         
     }
-    
-    console.log("---- Prodotti Filtrati ----");
-    productList.forEach(element => console.log(element));   
-    
-}
+
+    console.log("\n\nFiltered\n--------");
+    productList.forEach(element => console.log(element));
+    console.log("\n\n");
+
+    weeksIndex++;
+
+    if(weeksIndex >= config.weekExecutionProg)
+    {
+        clearInterval(intervalID);
+    }
+
+}, config.durationPrinting);

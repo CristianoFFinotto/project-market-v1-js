@@ -17,10 +17,10 @@
 
 export const config = {
     productOnShelf_MaxWeeks: 2, 
-    productByWeeksArrive: 5,
+    productByWeeksArrive: 2,
     dayStartExecutionProg: 0,       // plus current day
-    weekExecutionProg: 2,
-    durationPrinting: 3000,
+    weekExecutionProg: 5,
+    durationPrinting: 10000,
     daysInWeek: 7,
     idFormat: '00'
 }
@@ -29,7 +29,6 @@ export const config = {
 /*
     this array contains all products
 */
-
 
 export const itemsName = [
     'Cheese', 'Banana', 'Green Beans', 'Meat', 'Apple', 'Nutella', 'Rice', 
