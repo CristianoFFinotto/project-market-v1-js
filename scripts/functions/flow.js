@@ -26,8 +26,8 @@ export const addProduct = (currentDate, config, itemsName) => {
     let idProduct = tools.productIdGenerator(config);
     let nameProduct = tools.productNameGenerator(itemsName);
     let expiredDateProduct = tools.productExpiringDateGenerator(config);
-    let stateProduct = tools.newProductState(expiredDateProduct, currentDate);
     let checkedProduct = 0;
+    let stateProduct = tools.filterProductState(checkedProduct, expiredDateProduct, currentDate);
 
     return {
         id: idProduct,

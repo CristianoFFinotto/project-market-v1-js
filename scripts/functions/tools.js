@@ -107,21 +107,23 @@ export const productNameGenerator = (poolNames) => {
 
 // TODO: Specifiche
 
-export const newProductState = (expiredDate, currentDate) => {
+export const filterProductState = (checked, expiredDate, currentDate) => {
 
-    if(new Date(expiredDate) >= new Date(currentDate))
+    if(checked === 0)
+    {
+        if(new Date(expiredDate) >= new Date(currentDate))
             return "New";
         else
             return "Expired";
-}
-    
-
-export const filterProductState = (checked, expiredDate, currentDate) => {
-
-    if(new Date(expiredDate) < new Date(currentDate))
-        return "Expired";
-    else if(checked >= config.productOnShelf_MaxWeeks)
-        return "Old";
+    }
     else
-        return "Valid";   
+    {
+        if(new Date(expiredDate) < new Date(currentDate))
+            return "Expired";
+        else if(checked >= config.productOnShelf_MaxWeeks)
+            return "Old";
+        else
+            return "Valid";
+    }
+    
 }

@@ -35,6 +35,11 @@ for (let weeksIndex = 0; weeksIndex < config.weekExecutionProg; weeksIndex++) {
 
     currentDate.setDate(startingDate.getDate() + (config.daysInWeek * weeksIndex));
 
+    productList.forEach(element => {            // filter products
+        element.checked = weeksIndex;
+        element.status = tools.filterProductState(element.checked, element.expiredDate, currentDate);
+    })
+
     console.log("Current Date -->"+currentDate,"\n");
     for (let productsIndexArrived = 0; productsIndexArrived < config.productByWeeksArrive; productsIndexArrived++) {                 // arrive products
         
@@ -43,17 +48,12 @@ for (let weeksIndex = 0; weeksIndex < config.weekExecutionProg; weeksIndex++) {
     }
     
     console.log("---- Arrivo Prodotti ----");
-    for (const value of productList) {
-        console.log(value);
-    }
+    productList.forEach(element => console.log(element));
     
     // TODO: Stampa prodotti
     
-    for (let productIndex = 0; productIndex < productList.length; productIndex++) {                 // arrive products
+    for (let productIndex = 0; productIndex < productList.length; productIndex++) {                 // remove expired products
         
-        productList[productIndex].status = tools.filterProductState(productList[productIndex].checked, productList[productIndex].expiredDate, currentDate);;
-        productList[productIndex].checked = weeksIndex;
-
         if(productList[productIndex].status === "Expired")
         {
             productList.splice(productIndex, 1);
@@ -63,10 +63,6 @@ for (let weeksIndex = 0; weeksIndex < config.weekExecutionProg; weeksIndex++) {
     }
     
     console.log("---- Prodotti Filtrati ----");
-    for (const value of productList) {
-        console.log(value);
-    }
+    productList.forEach(element => console.log(element));   
     
 }
-
-
