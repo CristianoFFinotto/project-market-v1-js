@@ -12,11 +12,8 @@
 
 import { config, itemsName } from './config/config.js';
 import * as flow from './functions/flow.js';
-import * as tools from './functions/tools.js';
-
 
 let productList = [];
-
 
 /*
     current date (in real life)
@@ -26,25 +23,28 @@ let productList = [];
     set current date (program life) each week changes 
 */
 
-let date = new Date();             
-let startingDate = new Date(date); 
-startingDate.setDate(date.getDate() + config.dayStartExecutionProg);
+let startingDate = new Date();
+startingDate.setDate(startingDate.getDate() + config.dayStartExecutionProg);
+
+let finishingDate = new Date(startingDate);
+finishingDate.setDate(finishingDate.getDate() + (config.daysInWeek * config.weekExecutionProg));
+
 let currentDate = new Date(startingDate);
 
 let weeksIndex = 0; 
 
 let intervalID = setInterval(() => {
 
-    currentDate.setDate(startingDate.getDate() + (config.daysInWeek * weeksIndex));
+    productList.forEach(element => {            
+        element.checked ++;
+        element.status = flow.filterProductState(element.checked, element.expiredDate, currentDate, config);
+    });
 
-    productList.forEach(element => {            // filter products
-        element.checked++;
-        element.status = tools.filterProductState(element.checked, element.expiredDate, currentDate);
-    })
+    // add products
 
     for (let productsIndexArrived = 0; productsIndexArrived < config.productByWeeksArrive; productsIndexArrived++) {                 // arrive products
         
-        productList.push(flow.addProduct(currentDate, config, itemsName));
+        productList.push(flow.addProduct(startingDate, finishingDate, currentDate, config, itemsName));
         
     }
 
@@ -52,27 +52,29 @@ let intervalID = setInterval(() => {
     console.log("---------------------------------------------------------")
     productList.forEach(element => console.log(element));
 
-    // TODO: Stampa prodotti
+    // filter state
 
-    for (let productIndex = 0; productIndex < productList.length; productIndex++) {                 // remove expired products
-        
-        if(productList[productIndex].status === "Expired")
-        {
+    console.log('Filtered: ');
+
+    // remove expired product
+
+    for(let productIndex = 0; productIndex < productList.length; productIndex ++){
+
+        if(productList[productIndex].status === 'Expired' || productList[productIndex].status === 'Old'){
             productList.splice(productIndex, 1);
-            productIndex--;
+            productIndex --;
         }
-        
     }
 
-    console.log("\n\nFiltered\n--------");
     productList.forEach(element => console.log(element));
-    console.log("\n\n");
 
-    weeksIndex++;
+    weeksIndex ++;
 
     if(weeksIndex >= config.weekExecutionProg)
     {
         clearInterval(intervalID);
     }
+
+    currentDate.setDate(currentDate.getDate() + config.daysInWeek);
 
 }, config.durationPrinting);

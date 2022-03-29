@@ -89,41 +89,15 @@ export const productNameGenerator = (poolNames) => {
  * @returns expiration date generated
  */
 
- export const productExpiringDateGenerator = () => {
+ export const productExpiringDateGenerator = (startingDate, finishingDate) => {
 
-    let date = new Date();
-    let startingDate = new Date(date);
-    startingDate.setDate(date.getDate() + config.dayStartExecutionProg);
-    
-    let finishingDate = new Date(startingDate);
-    finishingDate.setDate(startingDate.getDate() + (config.daysInWeek * config.weekExecutionProg));
-    
-    let random = Math.floor(Math.random()*(config.daysInWeek * config.weekExecutionProg));
+    let random = Math.floor((Math.random()*(new Date(finishingDate) - new Date(startingDate))/(1000*60*60*24)) + 1);
+
     let expiringDate = new Date(startingDate);
-    expiringDate.setDate(startingDate.getDate() + random);
+    expiringDate.setDate(expiringDate.getDate() + random);
 
     return expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
 }
 
-// TODO: Specifiche
 
-export const filterProductState = (checked, expiredDate, currentDate) => {
 
-    if(checked === 0)
-    {
-        if(new Date(expiredDate) >= new Date(currentDate))
-            return "New";
-        else
-            return "Expired";
-    }
-    else
-    {
-        if(new Date(expiredDate) < new Date(currentDate))
-            return "Expired";
-        else if(checked >= config.productOnShelf_MaxWeeks)
-            return "Old";
-        else
-            return "Valid";
-    }
-    
-}
