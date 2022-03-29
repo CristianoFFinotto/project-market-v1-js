@@ -13,7 +13,15 @@
 
 import * as tools from './tools.js';
 
-// TODO: Specifiche
+/**
+ * Function add new product into market
+ * @param {object} startingDate 
+ * @param {object} finishingDate 
+ * @param {object} currentDate 
+ * @param {object} config 
+ * @param {object} itemsName 
+ * @returns new product structure
+ */
 
 export const addProduct = (startingDate, finishingDate, currentDate, config, itemsName) => {
 
@@ -32,9 +40,18 @@ export const addProduct = (startingDate, finishingDate, currentDate, config, ite
     }
 }
 
-// TODO: Specifiche
+/**
+ * Function filter product state
+ * @param {number} checked - number of check product
+ * @param {object} expiredDate - date of expiring product
+ * @param {object} currentDate - actual date
+ * @param {object} config - configuration file by manager
+ * @returns state of product
+ */
 
 export const filterProductState = (checked, expiredDate, currentDate, config) => {
+
+    // new product
 
     if(checked === 0)
     {
@@ -43,6 +60,9 @@ export const filterProductState = (checked, expiredDate, currentDate, config) =>
         else
             return 'Expired';
     }
+
+    // product already into market
+
     else
     {
         if((new Date(expiredDate).setHours(0,0,0,0) >=  new Date(currentDate).setHours(0,0,0,0)) && checked <= config.productOnShelf_MaxWeeks)

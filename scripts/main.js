@@ -16,11 +16,14 @@ import * as flow from './functions/flow.js';
 let productList = [];
 
 /*
-    current date (in real life)
-    copy of current date --> startingDate
-    move forward logically into timeline to program start
-    copy of starting date --> currentDate for range
-    set current date (program life) each week changes 
+    startingDate is date when program logically should start
+    finishingDate is date when program logically should stop
+
+    range of random expiring date is startingDate <-> finishingDate
+
+    currentDate is date when you move on into interval week by week
+
+    weeksIndex is number of week program runs
 */
 
 let startingDate = new Date();
@@ -35,9 +38,16 @@ let weeksIndex = 0;
 
 let intervalID = setInterval(() => {
 
-    productList.forEach(element => {            
-        element.checked ++;
-        element.status = flow.filterProductState(element.checked, element.expiredDate, currentDate, config);
+    /*
+        filter products
+        forEach executes only if array is not void .length > 1
+        increase all product check number
+        update all product state
+    */
+
+    productList.forEach(product => {            
+        product.checked ++;
+        product.status = flow.filterProductState(product.checked, product.expiredDate, currentDate, config);
     });
 
     // add products
@@ -50,13 +60,11 @@ let intervalID = setInterval(() => {
 
     console.log("Week of", currentDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-'));
     console.log("---------------------------------------------------------")
-    productList.forEach(element => console.log(element));
-
-    // filter state
+    productList.forEach(product => console.log(product));
 
     console.log('Filtered: ');
 
-    // remove expired product
+    // remove expired or old product
 
     for(let productIndex = 0; productIndex < productList.length; productIndex ++){
 
@@ -66,7 +74,7 @@ let intervalID = setInterval(() => {
         }
     }
 
-    productList.forEach(element => console.log(element));
+    productList.forEach(product => console.log(product));
 
     weeksIndex ++;
 
@@ -74,6 +82,8 @@ let intervalID = setInterval(() => {
     {
         clearInterval(intervalID);
     }
+
+    // Update currentDate to next Week 
 
     currentDate.setDate(currentDate.getDate() + config.daysInWeek);
 
