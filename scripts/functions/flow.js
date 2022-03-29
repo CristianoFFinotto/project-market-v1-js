@@ -21,11 +21,11 @@ import * as tools from './tools.js';
 
 // TODO: Specifiche
 
-export const addProduct = (currentDate, config, itemsName) => {
+export const addProduct = (startingDate, currentDate) => {
 
-    let idProduct = tools.productIdGenerator(config);
-    let nameProduct = tools.productNameGenerator(itemsName);
-    let expiredDateProduct = tools.productExpiringDateGenerator(config);
+    let idProduct = tools.productIdGenerator();
+    let nameProduct = tools.productNameGenerator();
+    let expiredDateProduct = tools.productExpiringDateGenerator(startingDate);
     let checkedProduct = 0;
     let stateProduct = tools.filterProductState(checkedProduct, expiredDateProduct, currentDate);
 

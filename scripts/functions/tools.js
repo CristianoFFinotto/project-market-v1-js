@@ -10,19 +10,19 @@
  * Used by functions file to execute some specific tools
  */
 
-import { config } from '../config/config.js';
+import { config, itemsName } from '../config/config.js';
 
 let lastID = '0';               // Global ID counter    
 
 /**
  * Function generate unique id based on global id
- * @param {object} config - configuration file by manager 
  * @returns increased unique id
  */
 
  export const productIdGenerator = () => {        // 00 or 000 FORMAT
 
-    if(Number(lastID) < 99){                    
+    if(Number(lastID) < 99){
+
         let formatLength = config.idFormat.length;
 
         switch (formatLength){
@@ -37,6 +37,7 @@ let lastID = '0';               // Global ID counter
                         return lastID;
                     else
                         return '0' + lastID;
+
             }
 
             case 3:{
@@ -51,24 +52,25 @@ let lastID = '0';               // Global ID counter
                         return '0' + lastID;
                     else
                         return lastID;
-                }
+
             }
         }
 
-        else {
+    }
+    else{
 
-            lastID = Number(lastID);
-            lastID ++;
-            lastID = lastID.toString();
-            
-            return lastID;
-        }
+        lastID = Number(lastID);
+        lastID ++;
+        lastID = lastID.toString();
+        
+        return lastID;
+        
+    }
 }
 
 
 /**
  * Function permit choose random element on array
- * @param {object} poolNames - array of name 
  * @returns random product name chosen on pool
  */
 
@@ -77,9 +79,9 @@ let lastID = '0';               // Global ID counter
     math.random generate random number from 0 (inclusive) <-> 1 (exlusive) ex. 0.76757573      
 */
 
-export const productNameGenerator = (poolNames) => {
+export const productNameGenerator = () => {
 
-    return poolNames[Math.floor(Math.random()*poolNames.length)];
+    return itemsName[Math.floor(Math.random()*itemsName.length)];
     
 }
 
@@ -89,16 +91,9 @@ export const productNameGenerator = (poolNames) => {
  * @returns expiration date generated
  */
 
- export const productExpiringDateGenerator = () => {
-
-    let date = new Date();
-    let startingDate = new Date(date);
-    startingDate.setDate(date.getDate() + config.dayStartExecutionProg);
+ export const productExpiringDateGenerator = (startingDate) => {
     
-    let finishingDate = new Date(startingDate);
-    finishingDate.setDate(startingDate.getDate() + (config.daysInWeek * config.weekExecutionProg));
-    
-    let random = Math.floor(Math.random()*(config.daysInWeek * config.weekExecutionProg));
+    let random = Math.floor(Math.random() * (config.daysInWeek * config.weekExecutionProg) + 1);
     let expiringDate = new Date(startingDate);
     expiringDate.setDate(startingDate.getDate() + random);
 
@@ -111,14 +106,14 @@ export const filterProductState = (checked, expiredDate, currentDate) => {
 
     if(checked === 0)
     {
-        if(new Date(expiredDate) >= new Date(currentDate))
+        if(new Date(expiredDate).setHours(0,0,0,0) >= new Date(currentDate).setHours(0,0,0,0))
             return "New";
         else
             return "Expired";
     }
     else
     {
-        if(new Date(expiredDate) < new Date(currentDate))
+        if(new Date(expiredDate).setHours(0,0,0,0) < new Date(currentDate).setHours(0,0,0,0))
             return "Expired";
         else if(checked >= config.productOnShelf_MaxWeeks)
             return "Old";
