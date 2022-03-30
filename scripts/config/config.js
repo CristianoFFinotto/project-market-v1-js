@@ -17,16 +17,16 @@
 
 export const config = {
     productOnShelf_MaxWeeks: 2, 
-    productByWeeksArrive: 5,
-    dayStartExecutionProg: 10,     
+    productByWeeksArrive: 3,
+    dayStartExecutionProg: 0,     
     weekExecutionProg: 5,
     durationPrinting: 2000,
-    daysInWeek: 7,
+    daysInWeek: 2,
     idFormat: '00',
     maxLengthDate: 'XX-XXX-XXXX',
     maxLengthName: 16,
     maxLengthState: 11,
-    paddingFormat: '*'
+    paddingFormat: ' '
 }
 
 
