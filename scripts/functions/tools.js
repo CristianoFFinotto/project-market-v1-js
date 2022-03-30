@@ -77,8 +77,8 @@ let lastID = '0';
  */
 
 /*
-    math.floor round to lower integer number EX. 5.9888888 -> 5
-    math.random generate random number from 0 (inclusive) <-> 1 (exlusive) ex. 0.76757573      
+  math.floor round to lower integer number EX. 5.9888888 -> 5
+  math.random generate random number from 0 (inclusive) <-> 1 (exlusive) ex. 0.76757573      
 */
 
 export const productNameGenerator = (poolNames) => {
@@ -90,17 +90,17 @@ export const productNameGenerator = (poolNames) => {
  * Function generate random expiration date from a range startingDate <-> finishingDate
  * @param {object} config - configuration file by manager
  * @returns expiration date generated
- */
+*/
 
  export const productExpiringDateGenerator = (startingDate, finishingDate, config) => {
 
-     /*
-        .random return random number from 0 inclusive to 1 exlusive ex. 0.3464365
-        .floor return less number of that param ex. 5.99999 -> 5
-        1 day in milliseconds = 1000 milliseconds * 60 seconds * 60 minutes * 24 hours
-        + 1 because random multiply result from random range 0 to n - 1 EX. 0.64534534 * random number 0 <-> n -1
-        expiringDate set from start program forward plus random days
-     */
+/*
+    .random return random number from 0 inclusive to 1 exlusive ex. 0.3464365
+    .floor return less number of that param ex. 5.99999 -> 5
+    1 day in milliseconds = 1000 milliseconds * 60 seconds * 60 minutes * 24 hours
+    + 1 because random multiply result from random range 0 to n - 1 EX. 0.64534534 * random number 0 <-> n -1
+    expiringDate set from start program forward plus random days
+*/
 
     let random = Math.floor((Math.random() * (new Date(finishingDate) - new Date(startingDate)) / (1000*60*60*24)) + 1);
 
@@ -114,10 +114,3 @@ export const productNameGenerator = (poolNames) => {
     else
         return expiredDateString;
 }
-
-
-
-    
-
-
-

@@ -24,9 +24,9 @@ import * as tools from './tools.js';
 
 export const addProduct = (startingDate, finishingDate, currentDate, config, itemsName) => {
 
-    /*
-        new product as default has check 0
-    */
+/*
+    new product as default has check 0
+*/
 
     let idProduct = tools.productIdGenerator(config);
     let nameProduct = tools.productNameGenerator(itemsName);

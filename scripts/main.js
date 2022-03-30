@@ -13,7 +13,7 @@
 import { config, itemsName } from './config/config.js';
 import * as flow from './functions/flow.js';
 
-let productList = [];
+const productList = [];
 
 /*
     startingDate is date when program logically should start
@@ -35,8 +35,6 @@ finishingDate.setDate(finishingDate.getDate() + (config.daysInWeek * config.week
 let currentDate = new Date(startingDate);
 
 let weeksIndex = 0; 
-
-const maxLengthDate = 'XX-XXX-XXXX';
 
 let intervalID = setInterval(() => {
 
@@ -62,14 +60,15 @@ let intervalID = setInterval(() => {
 
     let currentDateString = currentDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
     
-    if(currentDateString.length < maxLengthDate.length)
+    if(currentDateString.length < config.maxLengthDate.length)
         currentDateString = '0' + currentDateString;
 
-    console.log("Week of", currentDateString);
-    console.log("---------------------------------------------------------")
+    console.log("\n\nWeek of", currentDateString);
+    console.log("---------------------------------------------------------");
     productList.forEach(product => flow.printingProduct(product, config));
 
-    console.log('Filtered: ');
+    console.log('\n\nFiltered: ');
+    console.log("--------");
 
     // remove expired or old product
 

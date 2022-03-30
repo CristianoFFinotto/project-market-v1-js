@@ -16,14 +16,17 @@
 */
 
 export const config = {
-    productOnShelf_MaxWeeks: 5, 
-    productByWeeksArrive: 2,
-    dayStartExecutionProg: -5,       // plus current day
-    weekExecutionProg: 10,
-    durationPrinting: 3000,
+    productOnShelf_MaxWeeks: 2, 
+    productByWeeksArrive: 3,
+    dayStartExecutionProg: 0,     
+    weekExecutionProg: 5,
+    durationPrinting: 2000,
     daysInWeek: 2,
     idFormat: '00',
-    paddingType: '*'
+    maxLengthDate: 'XX-XXX-XXXX',
+    maxLengthName: 16,
+    maxLengthState: 11,
+    paddingFormat: '*'
 }
 
 
