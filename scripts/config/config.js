@@ -18,16 +18,20 @@
 export const config = {
     productOnShelf_MaxWeeks: 2, 
     productByWeeksArrive: 5,
-    dayStartExecutionProg: 10,       // plus current day
+    dayStartExecutionProg: 10,     
     weekExecutionProg: 5,
     durationPrinting: 2000,
     daysInWeek: 7,
-    idFormat: '00'
+    idFormat: '00',
+    maxLengthDate: 'XX-XXX-XXXX',
+    maxLengthName: 16,
+    maxLengthState: 11,
+    paddingFormat: '*'
 }
 
 
 /*
-    this array contains all products
+    this array contains all name products
 */
 
 export const itemsName = [

@@ -12,17 +12,22 @@
 
 import { config } from '../config/config.js';
 
-let lastID = '0';               // Global ID counter    
+/*
+    Global ID counter 
+*/
+
+let lastID = '0';                  
 
 /**
- * Function generate unique id based on global id
+ * Function generate unique id based on global id with specific format
  * @param {object} config - configuration file by manager 
  * @returns increased unique id
  */
 
- export const productIdGenerator = () => {        // 00 or 000 FORMAT
+ export const productIdGenerator = () => {        
 
-    if(Number(lastID) < 99){                    
+    if(Number(lastID) < 99){    
+
         let formatLength = config.idFormat.length;
 
         switch (formatLength){
@@ -66,29 +71,28 @@ let lastID = '0';               // Global ID counter
 
 
 /**
- * Function permit choose random element on array
+ * Function permit choose random element on given array
  * @param {object} poolNames - array of product name 
  * @returns random product name chosen on pool
  */
 
 /*
-    math.floor round to greater integer number ex. 1,2,5
+    math.floor round to lower integer number EX. 5.9888888 -> 5
     math.random generate random number from 0 (inclusive) <-> 1 (exlusive) ex. 0.76757573      
 */
 
 export const productNameGenerator = (poolNames) => {
 
-    return poolNames[Math.floor(Math.random()*poolNames.length)];
-    
+    return poolNames[Math.floor(Math.random() * poolNames.length)];
 }
 
 /**
- * Function generate random expiration date from a range
+ * Function generate random expiration date from a range startingDate <-> finishingDate
  * @param {object} config - configuration file by manager
  * @returns expiration date generated
  */
 
- export const productExpiringDateGenerator = (startingDate, finishingDate) => {
+ export const productExpiringDateGenerator = (startingDate, finishingDate, config) => {
 
      /*
         .random return random number from 0 inclusive to 1 exlusive ex. 0.3464365
@@ -98,13 +102,22 @@ export const productNameGenerator = (poolNames) => {
         expiringDate set from start program forward plus random days
      */
 
-    let random = Math.floor((Math.random()*(new Date(finishingDate) - new Date(startingDate))/(1000*60*60*24)) + 1);
+    let random = Math.floor((Math.random() * (new Date(finishingDate) - new Date(startingDate)) / (1000*60*60*24)) + 1);
 
     let expiringDate = new Date(startingDate);
     expiringDate.setDate(expiringDate.getDate() + random);
 
-    return expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+    let expiredDateString = expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+
+    if(expiredDateString.length < config.maxLengthDate.length)
+        return '0' + expiredDateString;
+    else
+        return expiredDateString;
 }
+
+
+
+    
 
 
 

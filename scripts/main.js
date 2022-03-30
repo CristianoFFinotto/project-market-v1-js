@@ -36,6 +36,8 @@ let currentDate = new Date(startingDate);
 
 let weeksIndex = 0; 
 
+const maxLengthDate = 'XX-XXX-XXXX';
+
 let intervalID = setInterval(() => {
 
     /*
@@ -58,9 +60,14 @@ let intervalID = setInterval(() => {
         
     }
 
-    console.log("Week of", currentDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-'));
+    let currentDateString = currentDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+    
+    if(currentDateString.length < maxLengthDate.length)
+        currentDateString = '0' + currentDateString;
+
+    console.log("Week of", currentDateString);
     console.log("---------------------------------------------------------")
-    productList.forEach(product => console.log(product));
+    productList.forEach(product => flow.printingProduct(product, config));
 
     console.log('Filtered: ');
 
@@ -74,7 +81,7 @@ let intervalID = setInterval(() => {
         }
     }
 
-    productList.forEach(product => console.log(product));
+    productList.forEach(product => flow.printingProduct(product, config));
 
     weeksIndex ++;
 
