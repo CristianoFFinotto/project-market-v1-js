@@ -30,7 +30,7 @@ export const config = {
 
 
 /*
-    this array contains all products
+    this array contains all name products
 */
 
 export const itemsName = [
