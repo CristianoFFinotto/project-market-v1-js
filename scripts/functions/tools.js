@@ -7,10 +7,11 @@
  * 
  * Funtion tools file
  *
- * Used by functions file to execute some specific tools
+ * Used by flow file to execute some specific tools
  */
 
-import { config } from '../config/config.js';
+
+ import { config, itemsName } from '../config/config.js';
 
 /*
     Global ID counter 
@@ -20,7 +21,6 @@ let lastID = '0';
 
 /**
  * Function generate unique id based on global id with specific format
- * @param {object} config - configuration file by manager 
  * @returns {string} increased unique id
  */
 
@@ -72,27 +72,28 @@ let lastID = '0';
 
 /**
  * Function permit choose random element on given array
- * @param {object} poolNames - array of product name 
  * @returns {string} random product name chosen on pool
  */
 
-export function productNameGenerator(poolNames){
+export function productNameGenerator(){
 
     /*
         math.floor round to lower integer number EX. 5.9888888 -> 5
         math.random generate random number from 0 (inclusive) <-> 1 (exlusive) ex. 0.76757573      
     */
 
-    return poolNames[Math.floor(Math.random() * poolNames.length)];
+    return itemsName[Math.floor(Math.random() * itemsName.length)];
 }
 
 /**
  * Function generate random expiration date from a range startingDate <-> finishingDate
- * @param {object} config - configuration file by manager
+ * @param {object} startingDate - starting date of the program
+ * @param {object} finishingDate - finishig date of the program (startingDate + (number of weeks * number of days per week))
+ * @param {string} maxLengthDate - max length of the date string
  * @returns {string} expiration date generated
  */
 
- export function productExpiringDateGenerator(startingDate, finishingDate, config) {
+ export function productExpiringDateGenerator(startingDate, finishingDate, maxLengthDate) {
 
      /*
         .random return random number from 0 inclusive to 1 exlusive ex. 0.3464365
@@ -111,7 +112,7 @@ export function productNameGenerator(poolNames){
 
     let expiredDateString = expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
 
-    if(expiredDateString.length < config.maxLengthDate.length)
+    if(expiredDateString.length < maxLengthDate.length)
         return '0' + expiredDateString;
     else
         return expiredDateString;

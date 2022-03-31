@@ -7,32 +7,33 @@
  * 
  * Function with main function used by main
  *
- * Contains usefull functions for flow logic of main
+ * Contains usefull functions to flow logic of main 
+ * main hot point in project are add products, filter products, print products
  */
 
 import * as tools from './tools.js';
+
+export const maxLengthDate = 'XX-XXX-XXXX';
 
 /**
  * Function generate product structure and inizialised it with
  * @param {object} startingDate - actual day + start days by manager
  * @param {object} finishingDate - startingDate + finish days by manager
  * @param {object} currentDate - actual date into time line startingDate <-> finishingDate
- * @param {object} config - configuration file by manager
- * @param {object} itemsName - pool of products name
  * @returns {object} new product structure with values
  */
 
-export function addProduct(startingDate, finishingDate, currentDate, config, itemsName) {
+ export const addProduct = (startingDate, finishingDate, currentDate) => {
 
     /*
         new product as default has check 0
     */
-
-    let idProduct = tools.productIdGenerator(config);
-    let nameProduct = tools.productNameGenerator(itemsName);
-    let expiredDateProduct = tools.productExpiringDateGenerator(startingDate, finishingDate, config);
-    let checkedProduct = 0; 
-    let stateProduct = filterProductState(checkedProduct, expiredDateProduct, currentDate, config);
+    
+    let idProduct = tools.productIdGenerator();
+    let nameProduct = tools.productNameGenerator();
+    let expiredDateProduct = tools.productExpiringDateGenerator(startingDate, finishingDate, maxLengthDate);
+    let checkedProduct = 0;
+    let stateProduct = filterProductState(checkedProduct, expiredDateProduct, currentDate);
 
     return {
         id: idProduct,
@@ -76,14 +77,12 @@ export function filterProductState(checked, expiredDate, currentDate, config) {
 
     else
     {
-        if((new Date(expiredDate).setHours(0,0,0,0) >=  new Date(currentDate).setHours(0,0,0,0)) && checked < config.productOnShelf_MaxWeeks)
-            return 'Valid';
-        
-        else if(checked >= config.productOnShelf_MaxWeeks)
-            return 'Old';
-
-        else
+        if(new Date(expiredDate).setHours(0,0,0,0) <  new Date(currentDate).setHours(0,0,0,0))
             return 'Expired';
+        else if(checked > config.productOnShelf_MaxWeeks)
+            return 'Old';
+        else
+            return 'Valid';
     }
 }
 
@@ -148,7 +147,7 @@ export function printingProduct(product, config) {
         }
 
         case 'Expired': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + product.expiredDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,102,102)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + product.expiredDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,150,150)');
             break;
         }
 

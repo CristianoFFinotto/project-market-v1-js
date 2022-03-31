@@ -60,7 +60,7 @@ let intervalID = setInterval(() => {
 
     let currentDateString = currentDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
     
-    if(currentDateString.length < config.maxLengthDate.length)
+    if(currentDateString.length < flow.maxLengthDate.length)
         currentDateString = '0' + currentDateString;
 
     console.log("\n\nWeek of", currentDateString);

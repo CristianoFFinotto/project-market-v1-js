@@ -94,20 +94,12 @@
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
+<h4 class="name" id="addProduct"><span class="type-signature">(constant) </span>addProduct<span class="type-signature"></span></h4>
 
-    
-
-    
-    <h4 class="name" id="addProduct"><span class="type-signature"></span>addProduct<span class="signature">(startingDate, finishingDate, currentDate, config, itemsName)</span><span class="type-signature"> &rarr; {object}</span></h4>
-    
-
-    
 
 
 
@@ -115,153 +107,6 @@
     Function generate product structure and inizialised it with
 </div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>startingDate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">actual day + start days by manager</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>finishingDate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">startingDate + finish days by manager</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>currentDate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">actual date into time line startingDate <-> finishingDate</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">configuration file by manager</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>itemsName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">pool of products name</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -297,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="flow.js.html">flow.js</a>, <a href="flow.js.html#line25">line 25</a>
+        <a href="flow.js.html">flow.js</a>, <a href="flow.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -313,41 +158,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
         
-<div class="param-desc">
-    new product structure with values
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
     
 
-
-
-
+    
+        <h3 class="subsection-title">Methods</h3>
 
         
             
@@ -525,7 +340,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="flow.js.html">flow.js</a>, <a href="flow.js.html#line55">line 55</a>
+        <a href="flow.js.html">flow.js</a>, <a href="flow.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -707,7 +522,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="flow.js.html">flow.js</a>, <a href="flow.js.html#line96">line 96</a>
+        <a href="flow.js.html">flow.js</a>, <a href="flow.js.html#line95">line 95</a>
     </li></ul></dd>
     
 
@@ -743,7 +558,7 @@
     
 
     
-    <h4 class="name" id="productExpiringDateGenerator"><span class="type-signature"></span>productExpiringDateGenerator<span class="signature">(config)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="productExpiringDateGenerator"><span class="type-signature"></span>productExpiringDateGenerator<span class="signature">(startingDate, finishingDate, maxLengthDate)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -787,7 +602,7 @@
 
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name"><code>startingDate</code></td>
             
 
             <td class="type">
@@ -803,7 +618,53 @@
 
             
 
-            <td class="description last">configuration file by manager</td>
+            <td class="description last">starting date of the program</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>finishingDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">finishig date of the program (startingDate + (number of weeks * number of days per week))</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxLengthDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">max length of the date string</td>
         </tr>
 
     
@@ -844,7 +705,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools.js.html">tools.js</a>, <a href="tools.js.html#line95">line 95</a>
+        <a href="tools.js.html">tools.js</a>, <a href="tools.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -902,7 +763,7 @@
     
 
     
-    <h4 class="name" id="productIdGenerator"><span class="type-signature"></span>productIdGenerator<span class="signature">(config)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="productIdGenerator"><span class="type-signature"></span>productIdGenerator<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -919,55 +780,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">configuration file by manager</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -1061,7 +873,7 @@
     
 
     
-    <h4 class="name" id="productNameGenerator"><span class="type-signature"></span>productNameGenerator<span class="signature">(poolNames)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="productNameGenerator"><span class="type-signature"></span>productNameGenerator<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -1078,55 +890,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>poolNames</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">array of product name</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -1162,7 +925,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="tools.js.html">tools.js</a>, <a href="tools.js.html#line79">line 79</a>
+        <a href="tools.js.html">tools.js</a>, <a href="tools.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -1236,7 +999,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 30 2022 16:55:40 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Mar 31 2022 12:40:29 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
