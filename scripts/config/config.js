@@ -23,8 +23,6 @@ export const config = {
     durationPrinting: 2000,
     daysInWeek: 2,
     idFormat: '00',
-    maxLengthName: 16,
-    maxLengthState: 11,
     paddingFormat: '*'
 }
 

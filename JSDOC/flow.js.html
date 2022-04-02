@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: flow.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: flow.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @file: functions.js
  * @author: Cristiano Francesco Finotto
  *          Federico Luciano Stroppiana
@@ -19,7 +47,7 @@ export const maxLengthDate = 'XX-XXX-XXXX';
  * Function generate product structure and inizialised it with
  * @param {object} startingDate - actual day + start days by manager
  * @param {object} finishingDate - startingDate + finish days by manager
- * @param {object} currentDate - actual date into time line startingDate <-> finishingDate
+ * @param {object} currentDate - actual date into time line startingDate &lt;-> finishingDate
  * @returns {object} new product structure with values
  */
 
@@ -48,7 +76,7 @@ export const maxLengthDate = 'XX-XXX-XXXX';
  * Function filter product state
  * @param {number} checked - number of time check product
  * @param {object} expiredDate - date of expiring product
- * @param {object} currentDate - actual date into time line startingDate <-> finishingDate
+ * @param {object} currentDate - actual date into time line startingDate &lt;-> finishingDate
  * @param {object} config - configuration file by manager
  * @returns {string} state of product
  */
@@ -77,7 +105,7 @@ export function filterProductState(checked, expiredDate, currentDate, config) {
 
     else
     {
-        if(new Date(expiredDate).setHours(0,0,0,0) <  new Date(currentDate).setHours(0,0,0,0))
+        if(new Date(expiredDate).setHours(0,0,0,0) &lt;  new Date(currentDate).setHours(0,0,0,0))
             return 'Expired';
         else if(checked > config.productOnShelf_MaxWeeks)
             return 'Old';
@@ -94,24 +122,19 @@ export function filterProductState(checked, expiredDate, currentDate, config) {
 
 export function printingProduct(product, config) {
 
-    const maxLengthName = 16;
-    const maxLengthState = 11;
-
     // fill whitespace inside name product
 
     let filteredProduct = product.name.replace(' ', config.paddingFormat);
 
-    let checkFormat = 'checks';
-
-    let expiringDateString = product.expiredDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+    let checkFormat;
 
     /* 
         find number of padding to add both part (start - end)
         in some cases /2 force equal padding (start - end) EX. length = 5 --> padding = 2 --> missed 1 padding
     */
 
-    const productLengthAdd = (maxLengthName - product.name.length)/2;
-    const statusLengthAdd = (maxLengthState - product.status.length)/2;
+    const productLengthAdd = (config.maxLengthName - product.name.length)/2;
+    const statusLengthAdd = (config.maxLengthState - product.status.length)/2;
     
     let paddedProduct = filteredProduct.padStart(filteredProduct.length + productLengthAdd, config.paddingFormat);
     paddedProduct = paddedProduct.padEnd(paddedProduct.length + productLengthAdd, config.paddingFormat);
@@ -121,19 +144,24 @@ export function printingProduct(product, config) {
 
     // fix padding length problem
 
-    if(paddedProduct.length < maxLengthName)
+    if(paddedProduct.length &lt; config.maxLengthName)
         paddedProduct = config.paddingFormat + paddedProduct;
-
-    if(expiringDateString.length < maxLengthDate.length)
-        expiringDateString = '0' + expiringDateString;
 
     if (product.checked === 1)
         checkFormat = 'check ';
+    
+    else
+        checkFormat = 'checks';
 
     /*
         managed print style based on product state
     */
 
+    let expiringDateString = product.expiredDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+
+    if(expiringDateString.length &lt; maxLengthDate.length)
+        expiringDateString = '0' + expiringDateString;
+        
     switch(product.status){
 
         case 'New': {
@@ -160,4 +188,26 @@ export function printingProduct(product, config) {
             break;
         }
     }
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addProduct">addProduct</a></li><li><a href="global.html#filterProductState">filterProductState</a></li><li><a href="global.html#printingProduct">printingProduct</a></li><li><a href="global.html#productExpiringDateGenerator">productExpiringDateGenerator</a></li><li><a href="global.html#productIdGenerator">productIdGenerator</a></li><li><a href="global.html#productNameGenerator">productNameGenerator</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Apr 02 2022 17:53:57 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
