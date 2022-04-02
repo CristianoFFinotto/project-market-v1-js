@@ -9,7 +9,7 @@
  *
  * Used by flow file to execute some specific tools
  */
-
+ 
 
  import { config, itemsName } from '../config/config.js';
 
@@ -24,8 +24,8 @@ let lastID = '0';
  * @returns {string} increased unique id
  */
 
- export function productIdGenerator() {        
-
+ export function productIdGenerator() {     
+  
     if(Number(lastID) < 99){    
 
         let formatLength = config.idFormat.length;
@@ -93,7 +93,7 @@ export function productNameGenerator(){
  * @returns {string} expiration date generated
  */
 
- export function productExpiringDateGenerator(startingDate, finishingDate, maxLengthDate) {
+ export function productExpiringDateGenerator(startingDate, finishingDate) {
 
      /*
         .random return random number from 0 inclusive to 1 exlusive ex. 0.3464365
@@ -110,12 +110,7 @@ export function productNameGenerator(){
     let expiringDate = new Date(startingDate);
     expiringDate.setDate(expiringDate.getDate() + random);
 
-    let expiredDateString = expiringDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
-
-    if(expiredDateString.length < maxLengthDate.length)
-        return '0' + expiredDateString;
-    else
-        return expiredDateString;
+    return expiringDate;
 }
 
 

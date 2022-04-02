@@ -52,9 +52,9 @@ let intervalID = setInterval(() => {
 
     // add products
 
-    for (let productsIndexArrived = 0; productsIndexArrived < config.productByWeeksArrive; productsIndexArrived++) {                 // arrive products
+    for (let productsIndexArrived = 0; productsIndexArrived < config.productByWeeksArrive; productsIndexArrived ++) {                 // arrive products
         
-        productList.push(flow.addProduct(startingDate, finishingDate, currentDate, config, itemsName));
+        productList.push(flow.addProduct(startingDate, finishingDate, currentDate, config, itemsName, config));
         
     }
 

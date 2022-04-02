@@ -23,7 +23,7 @@ export const maxLengthDate = 'XX-XXX-XXXX';
  * @returns {object} new product structure with values
  */
 
- export const addProduct = (startingDate, finishingDate, currentDate) => {
+ export const addProduct = (startingDate, finishingDate, currentDate, config) => {
 
     /*
         new product as default has check 0
@@ -31,9 +31,9 @@ export const maxLengthDate = 'XX-XXX-XXXX';
     
     let idProduct = tools.productIdGenerator();
     let nameProduct = tools.productNameGenerator();
-    let expiredDateProduct = tools.productExpiringDateGenerator(startingDate, finishingDate, maxLengthDate);
+    let expiredDateProduct = tools.productExpiringDateGenerator(startingDate, finishingDate);
     let checkedProduct = 0;
-    let stateProduct = filterProductState(checkedProduct, expiredDateProduct, currentDate);
+    let stateProduct = filterProductState(checkedProduct, expiredDateProduct, currentDate, config);
 
     return {
         id: idProduct,
@@ -60,7 +60,7 @@ export function filterProductState(checked, expiredDate, currentDate, config) {
         setHours set hoursValue, minutesValue, secondsValue, msValue
         use setHours to manage case of expiredDate === currentDate NOT considered expired
     */
-
+    
     if(checked === 0)
     {
         if(new Date(expiredDate).setHours(0,0,0,0) >=  new Date(currentDate).setHours(0,0,0,0))
@@ -129,25 +129,27 @@ export function printingProduct(product, config) {
         managed print style based on product state
     */
 
+    let formatExpiringDate = product.expiredDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+
     switch(product.status){
 
         case 'New': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + product.expiredDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,255,153)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,255,153)');
             break;
         }
 
         case 'Valid': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + product.expiredDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,204,255)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,204,255)');
             break;
         }
 
         case 'Old': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + product.expiredDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,255,153)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,255,153)');
             break;
         }
 
         case 'Expired': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + product.expiredDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,150,150)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,150,150)');
             break;
         }
 
