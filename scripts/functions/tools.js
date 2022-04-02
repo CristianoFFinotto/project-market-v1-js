@@ -89,7 +89,6 @@ export function productNameGenerator(){
  * Function generate random expiration date from a range startingDate <-> finishingDate
  * @param {object} startingDate - starting date of the program
  * @param {object} finishingDate - finishig date of the program (startingDate + (number of weeks * number of days per week))
- * @param {string} maxLengthDate - max length of the date string
  * @returns {string} expiration date generated
  */
 

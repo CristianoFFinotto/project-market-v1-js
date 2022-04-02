@@ -84,13 +84,13 @@ let intervalID = setInterval(() => {
 
     weeksIndex ++;
 
-    if(weeksIndex >= config.weekExecutionProg)
+    if(weeksIndex >= config.weekExecutionProg)          // stopping setInterval
     {
         clearInterval(intervalID);
     }
 
     // Update currentDate to next Week 
 
-    currentDate.setDate(currentDate.getDate() + config.daysInWeek);
+    currentDate.setDate(currentDate.getDate() + config.daysInWeek);         // updating currentDate
 
 }, config.durationPrinting);

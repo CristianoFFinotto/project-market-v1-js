@@ -20,6 +20,7 @@ export const maxLengthDate = 'XX-XXX-XXXX';
  * @param {object} startingDate - actual day + start days by manager
  * @param {object} finishingDate - startingDate + finish days by manager
  * @param {object} currentDate - actual date into time line startingDate <-> finishingDate
+ * @param {object} config - configuration file by manager
  * @returns {object} new product structure with values
  */
 
@@ -129,27 +130,30 @@ export function printingProduct(product, config) {
         managed print style based on product state
     */
 
-    let formatExpiringDate = product.expiredDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+    let expiringDateString = product.expiredDate.toLocaleString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}).toUpperCase().replaceAll(' ', '-');
+
+    if(expiringDateString.length < maxLengthDate.length)
+        expiringDateString = '0' + expiringDateString;
 
     switch(product.status){
 
         case 'New': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,255,153)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + expiringDateString + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,255,153)');
             break;
         }
 
         case 'Valid': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,204,255)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + expiringDateString + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(153,204,255)');
             break;
         }
 
         case 'Old': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,255,153)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + expiringDateString + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,255,153)');
             break;
         }
 
         case 'Expired': {
-            console.log ('%c' + product.id + ": " + paddedProduct + " " + formatExpiringDate + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,150,150)');
+            console.log ('%c' + product.id + ": " + paddedProduct + " " + expiringDateString + " " + paddedStatus + " [" + product.checked + " " + checkFormat + "]", 'background: rgb(255,150,150)');
             break;
         }
 
