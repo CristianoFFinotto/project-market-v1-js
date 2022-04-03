@@ -18,6 +18,25 @@ how many days there are in a week, ID format, type of padding), you must go to t
 
 # File and project structure
 
+```
+.
+├── img/   
+|      └──  changelog.png - image of git flow and changelog
+├── JSDOC/ - folder with documentation of file .js
+|        └── ...
+├── scripts/
+|          ├── config/
+|          |        └──config.js - configuration file
+|          ├── functions/
+|          |            ├──  flow.js - functions file following flow program 
+|          |            └── tools.js - utility functions file
+|          └── main.js - main application file
+├── index.html - main .html file
+└── README.md - documentation of project
+
+```
+## More information:
+
 Into the project folder you can find 3 main sections:
  - the *JSDOC* with the meaning, the arguments and the usage of every single function
  - the Javascript section, inserted in the *scripts* folder with:
@@ -76,8 +95,6 @@ Bonus 3:
  - Edge version 99.0.1150.55: tested and fully compatible
  - Firefox version 98.0.2: tested and fully compatible
 
-# External resources
-
 ---
 
 # License and contact information
@@ -95,4 +112,4 @@ To contact the developers use the email addresses belowin the "Authors" section.
 
 # Changelog and version history 
 
----
+![image info](./img/changelog.png)
