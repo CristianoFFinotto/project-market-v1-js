@@ -20,7 +20,8 @@ export const config = {
     productByWeeksArrive: 3,
     dayStartExecutionProg: 0,     
     weekExecutionProg: 5,
-    durationPrinting: 2000,
+    minDurationPrinting: 2000,
+    maxDurationPrinting: 5000,
     daysInWeek: 2,
     idFormat: '00',
     paddingFormat: '*'
