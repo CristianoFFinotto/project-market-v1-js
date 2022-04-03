@@ -93,4 +93,4 @@ let intervalID = setInterval(() => {
 
     currentDate.setDate(currentDate.getDate() + config.daysInWeek);
 
-}, Math.floor(Math.random() * (config.maxDurationPrinting - config.minDurationPrinting) + config.minDurationPrinting));         // random duration printing
+}, Math.floor(Math.random() * (config.maxDurationPrinting - config.minDurationPrinting + 1) + config.minDurationPrinting));         // random duration printing
